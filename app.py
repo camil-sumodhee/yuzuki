@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory, url_for
 import os
 
 app = Flask(__name__, static_folder='static')
@@ -16,21 +16,15 @@ else:
 
 @app.route('/', methods=['GET'])
 def index():
-    print('Request for index page received')
-    return render_template('index.html')
+   print('Request for index page received')
+   return render_template('index.html')
 
-@app.route('/resultat/<str:id>', methods=['GET'])
+@app.route('/resultat/<id>', methods=['GET'])
 def details(id):
-	if id == "LRr7NFfJ4HTKGOhvfqCJURsW66s1txd339tIc1ueyhXYbNdcgOHd3bsTpu0HdefvuQHwkyjeUobDSsKiSgKEPYYRGzjG0L0k2suk":
-    	return render_template('result.html')
-    else:
-    	return render_template('not_found.html')
-
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+   if id == "LRr7NFfJ4HTKGOhvfqCJURsW66s1txd339tIc1ueyhXYbNdcgOHd3bsTpu0HdefvuQHwkyjeUobDSsKiSgKEPYYRGzjG0L0k2suk":
+      return render_template('result.html')
+   else:
+      return render_template('not_found.html')
 
 if __name__ == '__main__':
    app.run()
